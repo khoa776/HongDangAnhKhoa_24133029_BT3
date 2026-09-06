@@ -69,22 +69,20 @@ public class LoginController {
                 response.addCookie(cookie);
             }
 
-            return "redirect:/welcome";
+            return "redirect:/home";
         } else {
             model.addAttribute("alert", "Tài khoản hoặc mật khẩu không đúng!");
             return "login";
         }
     }
 
-    // Trang Welcome sau khi Login thành công
     @GetMapping("/welcome")
-    public String welcomePage(HttpSession session, Model model) {
+    public String welcomePage(HttpSession session) {
         User user = (User) session.getAttribute("account");
         if (user == null) {
             return "redirect:/login";
         }
-        model.addAttribute("user", user);
-        return "welcome";
+        return "redirect:/home";
     }
 
     // Đăng xuất
