@@ -1,5 +1,7 @@
 # BÀI TẬP WEB 3
 
+---
+
 # 1. Các Tính Năng Chính
 
 **1.1. Xác thực người dùng:**
@@ -20,7 +22,7 @@
 
 # 2. Hướng Dẫn Chạy
 
-* **Chuẩn bị CSDL:** Tạo database `ShoppingServiceMVC` trong SQL Server và chạy file script khởi tạo bảng.
+* **Chuẩn bị CSDL:** Mở SQL Server Management Studio (SSMS) và chạy file `database.sql` có sẵn trong dự án để tạo CSDL và chèn dữ liệu mẫu (nếu chưa có).
 * **Cấu hình:** Kiểm tra lại tài khoản SQL Server và Gmail trong file `application.properties`.
 * **Khởi chạy:**
   * Mở Terminal và gõ: `.\mvnw spring-boot:run` (hoặc run java file `ShoppingservicemvcApplication.java`).
