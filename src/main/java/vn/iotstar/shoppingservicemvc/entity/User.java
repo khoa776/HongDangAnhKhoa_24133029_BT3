@@ -34,7 +34,10 @@ public class User implements Serializable {
     @Column(name = "createdDate")
     private Date createdDate;
 
-    // Getter & Setter thủ công để tránh lỗi Lombok
+    private int status; // 0: chưa kích hoạt, 1: đã kích hoạt
+    private String otpCode; // Mã OTP xác thực
+
+    // Getter & Setter thủ công
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
@@ -61,4 +64,10 @@ public class User implements Serializable {
 
     public Date getCreatedDate() { return createdDate; }
     public void setCreatedDate(Date createdDate) { this.createdDate = createdDate; }
+
+    public int getStatus() { return status; }
+    public void setStatus(int status) { this.status = status; }
+
+    public String getOtpCode() { return otpCode; }
+    public void setOtpCode(String otpCode) { this.otpCode = otpCode; }
 }

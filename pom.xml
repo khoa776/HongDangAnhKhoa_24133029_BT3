@@ -51,7 +51,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- THƯ VIỆN HỖ TRỢ JSP & JSTL (ĐÃ THÊM) -->
+        <!-- THƯ VIỆN HỖ TRỢ JSP & JSTL -->
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
@@ -71,6 +71,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
     </dependencies>
 
