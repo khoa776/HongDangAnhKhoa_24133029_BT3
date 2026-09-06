@@ -40,7 +40,19 @@
                 <tr>
                     <td>${item.categoryId}</td>
                     <td>${item.categoryname}</td>
-                    <td>${item.images}</td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${not empty item.images && item.images.startsWith('http')}">
+                                <img src="${item.images}" height="80" width="100" style="object-fit: cover;" />
+                            </c:when>
+                            <c:when test="${not empty item.images}">
+                                <img src="${pageContext.request.contextPath}/image/${item.images}" height="80" width="100" style="object-fit: cover;" />
+                            </c:when>
+                            <c:otherwise>
+                                <span>Không có ảnh</span>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
                     <td>${item.status == 1 ? 'Hoạt động' : 'Khóa'}</td>
                     <td>
                         <a href="${pageContext.request.contextPath}/admin/categories/edit/${item.categoryId}" class="btn btn-edit">Sửa</a>
