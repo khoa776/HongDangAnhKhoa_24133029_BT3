@@ -11,12 +11,10 @@ pageEncoding="UTF-8"%>
     <form
       action="${pageContext.request.contextPath}/admin/categories/save"
       method="post"
+      enctype="multipart/form-data"
     >
       <p>Tên danh mục: <input type="text" name="categoryname" required /></p>
-      <p>
-        Hình ảnh:
-        <input type="text" name="images" placeholder="Tên file ảnh..." />
-      </p>
+      <p>Chọn ảnh: <input type="file" name="imageFile" accept="image/*" /></p>
       <p>
         Trạng thái:
         <select name="status">

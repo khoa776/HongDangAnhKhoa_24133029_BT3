@@ -7,10 +7,11 @@
 </head>
 <body>
     <h2>CẬP NHẬT DANH MỤC</h2>
-    <form action="${pageContext.request.contextPath}/admin/categories/save" method="post">
+    <form action="${pageContext.request.contextPath}/admin/categories/save" method="post" enctype="multipart/form-data">
         <input type="hidden" name="categoryId" value="${category.categoryId}">
         <p>Tên danh mục: <input type="text" name="categoryname" value="${category.categoryname}" required></p>
-        <p>Hình ảnh: <input type="text" name="images" value="${category.images}"></p>
+        <p>Ảnh hiện tại: ${category.images}</p>
+        <p>Đổi ảnh mới: <input type="file" name="imageFile" accept="image/*"></p>
         <p>Trạng thái: 
             <select name="status">
                 <option value="1" ${category.status == 1 ? 'selected' : ''}>Hoạt động</option>
