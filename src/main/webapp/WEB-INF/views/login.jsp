@@ -36,6 +36,10 @@
                 <label for="remember" style="display:inline;">Ghi nhớ tôi (Cookie)</label>
             </div>
             <button type="submit" class="btn">Đăng nhập</button>
+            <p>
+                <a href="${pageContext.request.contextPath}/register">Đăng ký tài khoản mới</a> | 
+                <a href="${pageContext.request.contextPath}/forgot-password">Quên mật khẩu?</a>
+            </p>
         </form>
     </div>
 </body>
