@@ -26,14 +26,18 @@
         <span style="float: right;">
             <c:choose>
                 <c:when test="${not empty sessionScope.account}">
-                    <span>Xin chào, <strong>${sessionScope.account.fullname}</strong>!</span> | 
+                    <span>Xin chào, 
+                        <a href="${pageContext.request.contextPath}/profile" style="color: #00ffff; text-decoration: none; font-weight: bold;">
+                            ${sessionScope.account.fullname}
+                        </a>!
+                    </span> | 
                     <a href="${pageContext.request.contextPath}/logout" style="color: #ffc107; text-decoration: none; margin-left: 5px;">Đăng xuất</a>
                 </c:when>
                 <c:otherwise>
                     <a href="${pageContext.request.contextPath}/login" style="color: white; margin-right: 15px; text-decoration: none;">Đăng nhập</a>
                     <a href="${pageContext.request.contextPath}/register" style="color: white; text-decoration: none;">Đăng ký</a>
                 </c:otherwise>
-            </c:choose>
+        </c:choose>
         </span>
     </div>
 
