@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,8 +11,9 @@
         .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
         .form-group input[type="text"] { width: 100%; padding: 8px; box-sizing: border-box; }
         .btn { background-color: #28a745; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
-        .alert-success { color: green; margin-bottom: 10px; }
-        .alert-danger { color: red; margin-bottom: 10px; }
+        .alert-success { color: green; margin-bottom: 10px; font-weight: bold; }
+        .alert-danger { color: red; margin-bottom: 10px; font-weight: bold; }
+        .error-msg { color: red; font-size: 13px; margin-top: 4px; display: block; }
     </style>
 </head>
 <body>
@@ -26,7 +28,7 @@
             <div class="alert-danger">${error}</div>
         </c:if>
 
-        <form action="${pageContext.request.contextPath}/profile/update" method="post" enctype="multipart/form-data">
+        <form:form action="${pageContext.request.contextPath}/profile/update" method="post" enctype="multipart/form-data" modelAttribute="profileForm">
             <div class="form-group" style="text-align: center;">
                 <c:choose>
                     <c:when test="${not empty user.avatar}">
@@ -55,17 +57,19 @@
 
             <div class="form-group">
                 <label>Họ và tên (Fullname):</label>
-                <input type="text" name="fullname" value="${user.fullname}" required/>
+                <form:input path="fullname" />
+                <form:errors path="fullname" cssClass="error-msg" />
             </div>
 
             <div class="form-group">
                 <label>Số điện thoại (Phone):</label>
-                <input type="text" name="phone" value="${user.phone}"/>
+                <form:input path="phone" />
+                <form:errors path="phone" cssClass="error-msg" />
             </div>
 
             <button type="submit" class="btn">Lưu thông tin</button>
             <a href="${pageContext.request.contextPath}/home" style="margin-left: 10px; text-decoration: none; color: #333;">Hủy</a>
-        </form>
+        </form:form>
     </div>
 
 </body>
