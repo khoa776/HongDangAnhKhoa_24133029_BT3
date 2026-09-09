@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <title>Quản lý Sản phẩm</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
+        body { font-family: Arial, sans-serif; margin: 0; }
         table { width: 100%; border-collapse: collapse; margin-top: 15px; }
         th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
         th { background-color: #007bff; color: white; }
@@ -18,14 +18,8 @@
     </style>
 </head>
 <body>
-    <div style="margin-bottom: 15px; padding: 10px; background-color: #f8f9fa; border: 1px solid #ddd;">
-        <strong>Trang quản trị:</strong>
-        <a href="${pageContext.request.contextPath}/admin/categories" style="margin-left: 10px;">Quản lý Danh mục</a> | 
-        <a href="${pageContext.request.contextPath}/admin/products" style="margin-left: 5px;">Quản lý Sản phẩm</a> | 
-        <a href="${pageContext.request.contextPath}/home" style="margin-left: 5px; color: green;">Xem giao diện Khách hàng</a>
-    </div>
-    
-    <h2>DANH SÁCH SẢN PHẨM (ADMIN)</h2>
+
+    <h2>DANH SÁCH SẢN PHẨM</h2>
     <a href="${pageContext.request.contextPath}/admin/products/add" class="btn btn-add">+ Thêm sản phẩm mới</a>
 
     <table>
@@ -69,5 +63,6 @@
             </c:forEach>
         </tbody>
     </table>
+
 </body>
 </html>

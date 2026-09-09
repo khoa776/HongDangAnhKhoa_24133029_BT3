@@ -1,0 +1,10 @@
+<sitemesh>
+    <!-- Chỉ cần điền web.jsp hoặc /web.jsp, không điền lặp lại /WEB-INF/decorators/ -->
+    <mapping path="/*" name="web" decorator="web.jsp"/>
+    <mapping path="/admin/*" name="admin" decorator="admin.jsp"/>
+    
+    <!-- Exclude path -->
+    <mapping path="/login*" exclude="true"/>
+    <mapping path="/register*" exclude="true"/>
+    <mapping path="/api*" exclude="true"/>
+</sitemesh>

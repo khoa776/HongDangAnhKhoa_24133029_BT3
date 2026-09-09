@@ -7,7 +7,6 @@
     <meta charset="UTF-8">
     <title>Trang chủ - Shopping Service</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
         .container { padding: 20px; }
         .product-grid { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 15px; }
         .product-card { border: 1px solid #ccc; padding: 10px; width: 200px; text-align: center; border-radius: 8px; }
@@ -16,32 +15,7 @@
 </head>
 <body>
 
-    <!-- Thanh điều hướng Header -->
-    <div style="background-color: #333; padding: 12px 20px; color: white;">
-        <a href="${pageContext.request.contextPath}/home" style="color: white; margin-right: 15px; text-decoration: none; font-weight: bold;">Trang chủ</a>
-        <a href="${pageContext.request.contextPath}/product" style="color: white; margin-right: 15px; text-decoration: none;">Tất cả sản phẩm</a>
-        <a href="${pageContext.request.contextPath}/admin/products" style="color: #ffc107; margin-right: 15px; text-decoration: none;">[Admin] Quản lý Sản phẩm</a>
-        <a href="${pageContext.request.contextPath}/admin/categories" style="color: #ffc107; margin-right: 15px; text-decoration: none;">[Admin] Quản lý Danh mục</a>
-        
-        <span style="float: right;">
-            <c:choose>
-                <c:when test="${not empty sessionScope.account}">
-                    <span>Xin chào, 
-                        <a href="${pageContext.request.contextPath}/profile" style="color: #00ffff; text-decoration: none; font-weight: bold;">
-                            ${sessionScope.account.fullname}
-                        </a>!
-                    </span> | 
-                    <a href="${pageContext.request.contextPath}/logout" style="color: #ffc107; text-decoration: none; margin-left: 5px;">Đăng xuất</a>
-                </c:when>
-                <c:otherwise>
-                    <a href="${pageContext.request.contextPath}/login" style="color: white; margin-right: 15px; text-decoration: none;">Đăng nhập</a>
-                    <a href="${pageContext.request.contextPath}/register" style="color: white; text-decoration: none;">Đăng ký</a>
-                </c:otherwise>
-        </c:choose>
-        </span>
-    </div>
-
-    <!-- Nội dung chính của trang -->
+    <!-- Nội dung chính (Header đã do SiteMesh quản lý) -->
     <div class="container">
         <h2>TRANG CHỦ - 10 SẢN PHẨM MỚI NHẤT</h2>
         <p><a href="${pageContext.request.contextPath}/product">Xem tất cả sản phẩm</a></p>
