@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <div style="background-color: #333; padding: 12px 20px; color: white;">
-    <a href="${pageContext.request.contextPath}/home" style="color: white; margin-right: 15px; text-decoration: none; font-weight: bold;"><b>Trang chủ</b></a>
+    <a href="${pageContext.request.contextPath}/home" style="color: white; margin-right: 15px; text-decoration: none; font-weight: none;"><b>Trang chủ</b></a>
     <a href="${pageContext.request.contextPath}/product" style="color: white; margin-right: 15px; text-decoration: none;"><b>Tất cả sản phẩm</b></a>
     <a href="${pageContext.request.contextPath}/admin/products" style="color: #ffc107; margin-right: 15px; text-decoration: none;"><b>[Admin] Sản phẩm</b></a>
     <a href="${pageContext.request.contextPath}/admin/categories" style="color: #ffc107; margin-right: 15px; text-decoration: none;"><b>[Admin] Danh mục</b></a>

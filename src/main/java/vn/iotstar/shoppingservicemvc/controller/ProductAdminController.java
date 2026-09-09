@@ -1,13 +1,16 @@
 package vn.iotstar.shoppingservicemvc.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.iotstar.shoppingservicemvc.entity.Category;
 import vn.iotstar.shoppingservicemvc.entity.Product;
+import vn.iotstar.shoppingservicemvc.model.ProductForm;
 import vn.iotstar.shoppingservicemvc.service.CategoryService;
 import vn.iotstar.shoppingservicemvc.service.ProductService;
 
@@ -39,20 +42,34 @@ public class ProductAdminController {
     // Form thêm sản phẩm
     @GetMapping("/add")
     public String showAddForm(Model model) {
-        model.addAttribute("product", new Product());
+        model.addAttribute("productForm", new ProductForm());
         model.addAttribute("categories", categoryService.findAll());
         return "admin/product-add";
     }
 
     // Xử lý thêm sản phẩm
     @PostMapping("/add")
-    public String saveProduct(@ModelAttribute("product") Product product,
-                              @RequestParam("categoryId") int categoryId,
-                              @RequestParam("fileImage") MultipartFile fileImage) {
-        Category category = categoryService.findById(categoryId);
+    public String saveProduct(@Valid @ModelAttribute("productForm") ProductForm productForm,
+                              BindingResult bindingResult,
+                              Model model) {
+        
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("categories", categoryService.findAll());
+            return "admin/product-add";
+        }
+
+        Product product = new Product();
+        product.setProductName(productForm.getProductName());
+        product.setQuantity(productForm.getQuantity());
+        product.setUnitPrice(productForm.getUnitPrice());
+        product.setDiscount(productForm.getDiscount());
+        product.setDescription(productForm.getDescription());
+
+        Category category = categoryService.findById(productForm.getCategoryId());
         product.setCategory(category);
 
-        if (!fileImage.isEmpty()) {
+        MultipartFile fileImage = productForm.getFileImage();
+        if (fileImage != null && !fileImage.isEmpty()) {
             try {
                 String fileName = System.currentTimeMillis() + "_" + fileImage.getOriginalFilename();
                 File saveFile = new File(uploadPath, fileName);
@@ -63,6 +80,7 @@ public class ProductAdminController {
                 e.printStackTrace();
             }
         }
+
         productService.save(product);
         return "redirect:/admin/products";
     }
@@ -72,6 +90,18 @@ public class ProductAdminController {
     public String showEditForm(@PathVariable("id") int id, Model model) {
         Product product = productService.findById(id);
         if (product != null) {
+            ProductForm form = new ProductForm();
+            form.setProductId(product.getProductId());
+            form.setProductName(product.getProductName());
+            form.setQuantity(product.getQuantity());
+            form.setUnitPrice(product.getUnitPrice());
+            form.setDiscount(product.getDiscount());
+            form.setDescription(product.getDescription());
+            if (product.getCategory() != null) {
+                form.setCategoryId(product.getCategory().getCategoryId());
+            }
+
+            model.addAttribute("productForm", form);
             model.addAttribute("product", product);
             model.addAttribute("categories", categoryService.findAll());
             return "admin/product-edit";
@@ -81,14 +111,33 @@ public class ProductAdminController {
 
     // Xử lý sửa sản phẩm
     @PostMapping("/edit")
-    public String updateProduct(@ModelAttribute("product") Product product,
-                                @RequestParam("categoryId") int categoryId,
-                                @RequestParam("fileImage") MultipartFile fileImage) {
-        Product oldProduct = productService.findById(product.getProductId());
-        Category category = categoryService.findById(categoryId);
+    public String updateProduct(@Valid @ModelAttribute("productForm") ProductForm productForm,
+                                BindingResult bindingResult,
+                                Model model) {
+
+        if (bindingResult.hasErrors()) {
+            Product product = productService.findById(productForm.getProductId());
+            model.addAttribute("product", product);
+            model.addAttribute("categories", categoryService.findAll());
+            return "admin/product-edit";
+        }
+
+        Product product = productService.findById(productForm.getProductId());
+        if (product == null) {
+            return "redirect:/admin/products";
+        }
+
+        product.setProductName(productForm.getProductName());
+        product.setQuantity(productForm.getQuantity());
+        product.setUnitPrice(productForm.getUnitPrice());
+        product.setDiscount(productForm.getDiscount());
+        product.setDescription(productForm.getDescription());
+
+        Category category = categoryService.findById(productForm.getCategoryId());
         product.setCategory(category);
 
-        if (!fileImage.isEmpty()) {
+        MultipartFile fileImage = productForm.getFileImage();
+        if (fileImage != null && !fileImage.isEmpty()) {
             try {
                 String fileName = System.currentTimeMillis() + "_" + fileImage.getOriginalFilename();
                 File saveFile = new File(uploadPath, fileName);
@@ -98,8 +147,6 @@ public class ProductAdminController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if (oldProduct != null) {
-            product.setImages(oldProduct.getImages());
         }
 
         productService.save(product);
